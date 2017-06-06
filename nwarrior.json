@@ -1,0 +1,11 @@
+{
+  "dirs": {
+    "baseDir": "./app/",
+    "JS": "src/js/",
+    "JSDest": "app/js/",
+    "SASS": "src/sass/",
+    "CSSDest": "app/css/",
+    "JSFiles": "src/js/**/*.js",    
+    "SASSFiles": "src/sass/**/*.scss"
+  }
+}

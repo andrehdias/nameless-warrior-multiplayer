@@ -1,0 +1,4 @@
+node_modules
+.sass-cache
+*.min
+src/config.json
