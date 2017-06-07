@@ -4,19 +4,23 @@ export default class Character extends Phaser.Sprite {
 	constructor(game, x, y, sprite) {
 		super(game, x, y, sprite);
 
+    console.log(arguments)
+
     this.anchor.setTo(0.5, 0.5);
 
     this.lastDirection = GLOBALS.DIRECTIONS.DOWN;
-
-    this.textY = 12;
 
     this.speed = 200;
 
     this.frame = 0;
     this.alive = true;
+
+    this.create();
 	}
 
   create() {
+    console.log('hey')
+
 		this.game.add.existing(this);
 	  this.game.physics.arcade.enable(this);
 	  this.body.collideWorldBounds = true;
@@ -31,9 +35,6 @@ export default class Character extends Phaser.Sprite {
 	}
 
   handleWalking() {
-	  const speed = this.speed,
-          alternativeControls = (localStorage.getItem('NWarriorControls') === 'true');
-
 	  let direction;
 
     if(this.attacking) {
@@ -60,7 +61,7 @@ export default class Character extends Phaser.Sprite {
 	  }
 
     if(!this.receivingAttack) {
-		  this.walk(direction, speed);
+		  this.walk(direction);
     }
 	}
 
@@ -72,12 +73,12 @@ export default class Character extends Phaser.Sprite {
     this.animations.add(GLOBALS.DIRECTIONS.LEFT, [9, 10, 11], 10, false);
   }
 
-  walk(direction, speed = 50) {
+  walk(direction) {
     switch(direction){
       case GLOBALS.DIRECTIONS.DOWN:
         this.lastFrame = 0;
         this.lastDirection = GLOBALS.DIRECTIONS.DOWN;
-        this.body.velocity.y = speed;
+        this.body.velocity.y = this.speed;
         this.body.velocity.x = 0;
         break;
 
@@ -85,20 +86,20 @@ export default class Character extends Phaser.Sprite {
         this.lastFrame = 3;
         this.lastDirection = GLOBALS.DIRECTIONS.RIGHT;
         this.body.velocity.y = 0;
-        this.body.velocity.x = speed;
+        this.body.velocity.x = this.speed;
         break;
 
       case GLOBALS.DIRECTIONS.UP:
         this.lastFrame = 6;
         this.lastDirection = GLOBALS.DIRECTIONS.UP;
-        this.body.velocity.y = -speed;
+        this.body.velocity.y = -this.speed;
         this.body.velocity.x = 0;
         break;
 
       case GLOBALS.DIRECTIONS.LEFT:
         this.lastFrame = 9;
         this.lastDirection = GLOBALS.DIRECTIONS.LEFT;
-        this.body.velocity.x = -speed;
+        this.body.velocity.x = -this.speed;
         this.body.velocity.y = 0;
         break;
 
