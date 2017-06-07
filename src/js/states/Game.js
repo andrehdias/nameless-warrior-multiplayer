@@ -5,14 +5,28 @@ import GLOBALS from '../core/Globals';
 export default class Game extends Phaser.State {
 	create() {
     this.game.time.advancedTiming = true;
+    this.game.stage.disableVisibilityChange = true;
     this.map = new Map(this.game);
-    this.player = new Player(this.game, 50, 50, GLOBALS.SWORDSMAN);
-    this.map.renderLastLayer();
+
+    this.server = io.connect();
+
+    this.server.emit('newplayer');
+
+    this.bind();
 	}
 
+  bind() {
+    this.server.on('newplayer',function(data){
+      this.player = new Player(this.game, data.x, data.y, GLOBALS.SWORDSMAN);
+      this.map.renderLastLayer();
+    });
+  }
+
   update() {
-    this.game.physics.arcade.collide(this.player, this.map.collideLayer);
-    this.game.physics.arcade.collide(this.player, this.map.groundLayer);
+    if(this.player) {
+      this.game.physics.arcade.collide(this.player, this.map.collideLayer);
+      this.game.physics.arcade.collide(this.player, this.map.groundLayer);
+    }
   }
 
   render() {

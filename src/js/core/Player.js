@@ -4,8 +4,6 @@ export default class Character extends Phaser.Sprite {
 	constructor(game, x, y, sprite) {
 		super(game, x, y, sprite);
 
-    console.log(arguments)
-
     this.anchor.setTo(0.5, 0.5);
 
     this.lastDirection = GLOBALS.DIRECTIONS.DOWN;
@@ -19,8 +17,6 @@ export default class Character extends Phaser.Sprite {
 	}
 
   create() {
-    console.log('hey')
-
 		this.game.add.existing(this);
 	  this.game.physics.arcade.enable(this);
 	  this.body.collideWorldBounds = true;
