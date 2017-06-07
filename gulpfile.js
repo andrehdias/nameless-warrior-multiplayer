@@ -20,23 +20,23 @@ var gulp        = require('gulp'),
 
 // Static Server + watching scss/html files
 gulp.task('serve', ['sass'], function() {
-  browserSync.init({
-    server: {
-      baseDir: config.dirs.baseDir
-    },
-    notify: {
-      styles: {
-          top: 'auto',
-          bottom: '10px',
-          right: '10px'
-      }
-    },
-    open: false
-  });
+  // browserSync.init({
+  //   server: {
+  //     baseDir: config.dirs.baseDir
+  //   },
+  //   notify: {
+  //     styles: {
+  //         top: 'auto',
+  //         bottom: '10px',
+  //         right: '10px'
+  //     }
+  //   },
+  //   open: false
+  // });
 
   gulp.watch(config.dirs.SASSFiles, ['sass']);
   gulp.watch(config.dirs.JSFiles, ['scripts']);
-  gulp.watch(["app/**/*.html", "app/js/**/*.js"]).on('change', browserSync.reload);
+  // gulp.watch(["app/**/*.html", "app/js/**/*.js"]).on('change', browserSync.reload);
 });
 
 
